@@ -4,10 +4,15 @@ import StudentInfo from './StudentInfo'
 export default class StudentList extends Component { 
     render() {
         return (
-            <div>
-                <h1>This is Student List</h1>
-                <StudentInfo />
-            </div>
+            <ul className = "list-group my-5">
+                <h3 className = "text-capitalize text-center">
+                    Students
+                </h3>
+                < StudentInfo />
+                <button type = "button" className = "btn btn-danger btn-block text-capitalize mt-5">
+                    Clear All
+                </button>
+            </ul>
             );
     }
 }
