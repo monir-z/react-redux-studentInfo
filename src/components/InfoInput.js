@@ -24,6 +24,7 @@ export default class InfoInput extends Component {
                        <input type="text" className="form-control" placeholder = "Enter your email here!!!"/>
                        
                     </div> 
+                    <button type = "submit" className = "btn btn-block btn-primary mt-3">ADD</button>
                 </form>
             </div>
         );
