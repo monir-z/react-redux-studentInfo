@@ -32,7 +32,7 @@ export default class InfoInput extends Component {
                        />
                        
                     </div> 
-                    <button type = "submit" className = "btn btn-block btn-primary mt-3">Add Name and Email</button>
+                    <button type = "submit" className = "btn btn-block btn-primary mt-3" style={{cursor:'pointer'}}>Add Name and Email</button>
                 </form>
             </div>
         );

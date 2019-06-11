@@ -3,15 +3,12 @@ import InfoInput from './components/InfoInput';
 import StudentList from './components/StudentList';
 import "bootstrap/dist/css/bootstrap.min.css"
 import uuid from "uuid";
+import { connect } from 'react-redux';
+//console.log()
 class App extends Component {
 
-    state = {
-    items: [],
-    id: uuid(), 
-    name: '',
-    email: '',
-    editItem: false
-    };
+    state = {id: uuid(), name: '', email: ''}
+    
     handleChangeName = e =>{
       this.setState(
         {
@@ -26,33 +23,20 @@ class App extends Component {
         }
       );
     };
-    handleSubmit= e  => {
+    handleSubmit = e  => {
       e.preventDefault();
-
-      const newItem = {
-        id: this.state.id,
-        name: this.state.name, 
-        email: this.state.email
-      }
-      console.log(newItem);
-      const updatedItems = [...this.state.items, newItem];
-      this.setState(
+      this.props.addStudent(this.state);
+      return this.setState(
         {
-          items: updatedItems, 
           name: '', 
           email: '',
-          id: uuid(), 
-          editItem: false
-
+          id: uuid()
         }
       )
-    }
-    clearAll = () => {
-      this.setState(
-        {items: []}
-      );
+      
     }
   render() {
+    //console.log(this.props);
     return (
       <div className="container">
         <div className="row">
@@ -67,19 +51,29 @@ class App extends Component {
 
             handleSubmit = {this.handleSubmit}
             />
-
-            <StudentList 
-              items= {this.state.items}
-              clearAll = {this.clearAll}
-            /> 
-
+            <StudentList /> 
           </div>
         </div>
       </div>
-
-
     );
   }
 }
+const mapStateToProps = state => ({
+  items: state.items
+});
+//console.log(this.props.items)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addStudent: (newItem) => {
+      dispatch({type: 'ADD', payload: { value: newItem }})
+    },
+    deleteStudent: (id) => {
+      dispatch({type: 'DELETE', payload: { value: id }})
+    }
+  }
+}
 
-export default App;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
